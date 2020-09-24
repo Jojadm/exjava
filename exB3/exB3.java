@@ -5,11 +5,11 @@ public class exB3 {
 		int[] integers = {1,2,3,4,5,6,7,8,9,10};
 		int sum = 0;
 		
-		for (int i=0;i<integers.length;i++) {
-			sum = sum + integers[i];
+		for (int value : integers){
+			sum+=value;
 		}
-		double avg = sum / (double) integers.length;
 		
+		double avg = sum / (double) integers.length;
 		System.out.println("The average is : " +avg);
 	}
 }
