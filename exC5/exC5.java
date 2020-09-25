@@ -27,17 +27,16 @@ public class exC5 {
 				correctType = true;
 			} catch (NumberFormatException e) {
 				System.out.println("Not a correct type is entered. Try again.");
-				correctType = false;
 			}
 		}
 		while (!correctType);
+		correctType=false;
 		do {	
 			System.out.println("Please enter price per day");
 			try {
 				pricePerDay = Double.parseDouble(sc.nextLine());
 				correctType = true;
 			} catch (NumberFormatException e) {
-				correctType = false;
 				System.out.println("Not a correct type is entered. Try again.");
 			}
 		}
