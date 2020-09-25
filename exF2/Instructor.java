@@ -65,28 +65,32 @@ public class Instructor {
 	
 	public void printSalaryHistory () throws IOException {
 		double calcSalary=this.startSalary;
-		int seniority=this.age-this.startAge;
+		int calcSeniority=0;
 		int calcAge = this.startAge;
+		boolean ageReached=false, seniorityReached=false;
 		List<String> printLines = new ArrayList<String>();
-				
-		while ((calcAge <= 65) && (seniority <= 35)) {
+		
+		do {
 			printLines.add("Salary of " +name+ " " +lastName+ " at " +calcAge+ " is " +calcSalary);
 			calcSalary*=1.03;
 			calcAge+=5;
-			seniority+=5;
+			calcSeniority+=5;
+		} while ((calcAge<=this.age) && (calcSeniority<=35));
+		if (calcSeniority>35) {
+			printLines.add("Maximum salary reached");
 		}
-		printLines.add("Maximum salary reached");
 		writeToFile(printLines);
 	}
 
-	private static void writeToFile(List<String> printLines) throws IOException {
-		Path pathToFile= Paths.get("salaryhistory.txt");
+	private void writeToFile(List<String> printLines) throws IOException {
+		Path pathToFile= Paths.get("salaryhistory"+name+".txt");
 		BufferedWriter writer = Files.newBufferedWriter(pathToFile);
 		for (String line : printLines) {
 			System.out.println("Printing: " +line);
 			writer.write(line);
 			writer.newLine();
 		}
+		writer.close();	
 	}
 }
 	

@@ -1,4 +1,0 @@
-Course title: JavaNumber of days: 10Price per day: 67.4Prior knowledge requested : true
-Number of instructors: 2
-Total price (no taxes to pay) : 674.0
-This price for this course is OK
