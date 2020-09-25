@@ -54,32 +54,34 @@ public class exE1 {
 		while (!correctType);
 		
 		int seniority = currentAge-startingAge;		
-		printSalaryHistory(name, currentAge, startingAge, startingSalary, seniority);
-	
+		List<String> printLines = new ArrayList<>();
+		printSalaryHistory(printLines, name, currentAge, startingAge, startingSalary, seniority);
 	}
 	
+	public static void printSalaryHistory (List<String> printLines, String name, int currentAge, int startingAge, double salary, int seniority) {
 		
-	public static void printSalaryHistory (String name, int startingAge, int currentAge, double salary, int seniority) {
-		String line = ("Salary of " +name+ " at " +startingAge+ " is " +salary);
-		System.out.println("Salary line: " +line); 
-		writeToFile(line);
+		printLines.add("Salary of " +name+ " at " +startingAge+ " is " +salary);
+		System.out.println("Salary of " +name+ " at " +startingAge+ " is " +salary);
 		salary*=1.03;
 		startingAge+=5;
+		currentAge+=5;
 		seniority+=5;
-		if ((startingAge <= 65) && (seniority <= 35)) {
-			printSalaryHistory(name, startingAge, currentAge, salary, seniority);
+		if ((currentAge <= 65) && (seniority <= 35)) {
+			printSalaryHistory(printLines, name, currentAge, startingAge, salary, seniority);
 		} else {
-			String endline=("Maximum salary reached");
-			writeToFile(endline);
+			printLines.add("Maximum salary reached");
+			writeToFile(printLines);
 		}
 	}
 	
-	public static void writeToFile(String line) {
+	public static void writeToFile(List<String> printLines) {
 		Path pathToFile= Paths.get("salaryhistory.txt");
 		try (BufferedWriter writer = Files.newBufferedWriter(pathToFile)){
-			System.out.println("Write to file: " +line);
-			writer.write(line);
-			writer.newLine();
+			for (String line : printLines) {
+				System.out.println("Printing: " +line);
+				writer.write(line);
+				writer.newLine();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
